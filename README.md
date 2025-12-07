@@ -1,4 +1,4 @@
-# 🌍 CrossBorderX – Crypto-Powered Global Money Transfer
+# 🌍 CrossBorderX – Instant Global FX Transfers Using Crypto Rails (Walletless)
 
 > **Transfer any currency across borders within seconds using stablecoins and blockchain liquidity pools.**
 
@@ -17,65 +17,137 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 ## 🧩 Features
 
 ✅ **Instant Transfers** – Send any amount across borders using stablecoins within seconds.  
-✅ **Low Fees** – Avoid intermediary bank and forex conversion fees.  
-✅ **Liquidity Pool Swaps** – Automatic conversion between currencies via Uniswap-style pools.  
+✅ **Low Fees** – Avoid intermediary bank and forex conversion fees - ~0.1%–0.3% backend fees (liquidity, gas, swap). 
+✅ **Walletless UX** - user doesn’t hold crypto, no MetaMask, no private keys  
 ✅ **Transparent & Auditable** – Every transaction is visible on the blockchain.  
-✅ **Compliance-Ready** – Includes a KYC placeholder for future AML/KYC integration.  
+✅ **Compliance-Ready** – Includes a KYC placeholder for future AML/KYC integration, fiat on/off-ramp checks.  
 ✅ **Built for FinTech Innovation** – A proof-of-concept for next-generation remittance startups.
 
 ---
 
 ## 🏗️ Architecture
 
-USER (Metamask or any other wallet)
-│
-▼
-Frontend (React + Ethers.js)
-│
-▼
-Smart Contracts (Solidity + Hardhat)
-│
-▼
-Polygon Mumbai Testnet / Uniswap Pool
+┌──────────────────────┐
+│  CrossBorderX Client │  (mobile/web, no crypto UI)
+└──────────┬───────────┘
+           │
+           ▼
+┌────────────────────────┐
+│  CrossBorderX Backend  │
+│  (custodial wallet)    │
+├────────────────────────┤
+│ • User KYC + risk checks
+│ • Walletless orchestration
+│ • FX rate engine
+│ • Liquidity routing
+│ • Compliance layer
+└──────────┬─────────────┘
+           │
+           ▼
+┌────────────────────────┐
+│  Crypto Settlement Hub │
+├────────────────────────┤
+│ • INR → USDT conversion
+│ • Stablecoin custody
+│ • Price oracle + swap routing
+│ • Smart contract triggers
+└──────────┬─────────────┘
+           │
+           ▼
+┌────────────────────────┐
+│  Blockchain Network    │  (Polygon)
+├────────────────────────┤
+│ • 5 sec – 2 min settlement
+│ • Very low fees
+└──────────┬─────────────┘
+           │
+           ▼
+┌────────────────────────┐
+│ Liquidity Pool (DEX)   │
+├────────────────────────┤
+│ • USDT → GBP stable swap
+│ • 0.05%–0.3% LP fee
+└──────────┬─────────────┘
+           │
+           ▼
+┌────────────────────────┐
+│ Fiat Off-Ramp Partner  │
+├────────────────────────┤
+│ • Convert GBP stable → GBP fiat
+│ • Send GBP via UK FPS
+│ • Arrival: seconds → minutes
+└────────────────────────┘
+
 
 ---
 
 ## ⚙️ Tech Stack
 
-| Layer | Tools |
-|-------|-------|
-| **Frontend** | React.js, Ethers.js |
-| **Smart Contracts** | Solidity, Hardhat |
-| **Blockchain** | Polygon Mumbai Testnet |
-| **Wallet** | MetaMask |
-| **Node Provider** | Alchemy / Infura |
-| **DEX / Liquidity** | Uniswap (Testnet Integration) |
+| **Layer**                           | **Tools / Services**                                                                                     |
+| ----------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| **Frontend**                        | React.js • Next.js • TypeScript • TailwindCSS                                                            |
+| **Backend (API)**                   | Node.js • Express.js / NestJS • WebSockets • REST / gRPC                                                 |
+| **Blockchain Interaction**          | Ethers.js • Web3.js • Viem                                                                               |
+| **Smart Contracts**                 | Solidity • Hardhat • OpenZeppelin • Foundry (optional)                                                   |
+| **Blockchain Network**              | Polygon PoS / zkEVM                                                                                      |
+| **Stablecoins**                     | USDT • USDC                                                                                              |
+| **Liquidity Layer**                 | Uniswap V3 • Custom liquidity pool contracts • 1inch Routing (optional)                                  |
+| **Oracle / FX Rates**               | Chainlink Price Feeds • Custom FX API                                                                    |
+| **Custody / Wallet Infrastructure** | Fireblocks • Circle APIs • Self-custodial hot wallet service (backend-managed keys)                      |
+| **Fiat On/Off-Ramp**                | On/Off-Ramp Partner (Transak / Onmeta / Circle) • UK FPS payout partner (ClearBank / Modulr / Paynetics) |
+| **KYC/AML**                         | Sumsub • Chainalysis KYT (transaction monitoring)                                                        |
+| **Database**                        | PostgreSQL • Redis (caching/queues)                                                                      |
+| **Infrastructure**                  | Docker • Kubernetes • Load Balancer • NGINX • Cloudflare                                                 |
+| **Cloud Provider**                  | AWS / GCP / Azure (EC2, Lambda, S3, RDS)                                                                 |
+| **Monitoring & Logging**            | Prometheus • Grafana • ELK Stack • Sentry                                                                |
+| **CI/CD**                           | GitHub Actions • Docker Hub • Terraform                                                                  |
+
+
+---
+## 🔄 How the Transfer Works (Walletless Flow)
+
+1️⃣ **User Initiates Transfer** - User enters INR → GBP and pays via UPI/Bank Transfer.
+2️⃣ **Backend Custody (No Wallet for User)** - Backend stores INR in a custodial balance under their verified profile.
+3️⃣ **Convert INR → USDT (Backend Only)** - Backend mints/purchases USDT via exchange or OTC partner.
+4️⃣ **Blockchain Settlement** - USDT sent instantly on a high-speed chain (Polygon/Base/Solana).
+5️⃣ **Liquidity Pool Swap** - USDT → GBP-stablecoin using low-slippage LP.
+6️⃣ **Off-Ramp to UK Bank** - GBP → UK bank via Faster Payments System (FPS). (USER CHOICE) - ⏱️ Usually minutes depending on bank.
+7️⃣ **Receiver gets GBP in Bank** - Receiver never interacts with crypto.
 
 ---
 
-## 🪙 Example Transaction Flow
+## 💸 Cost Breakdown
 
-1️⃣ **User Inputs** – Sender enters amount and target currency (e.g., INR → GBP).  
-2️⃣ **Stablecoin Conversion** – INR is converted into USDT (simulation).  
-3️⃣ **Blockchain Transfer** – USDT sent via Polygon network to receiver’s wallet.  
-4️⃣ **Liquidity Pool Swap** – USDT swapped into GBP-equivalent token (simulated).  
-5️⃣ **Instant Receipt** – Receiver gets funds in GBP wallet.
+| Component               | Cost (Approx)     |
+| ----------------------- | ----------------- |
+| Blockchain gas fees     | $0.01 – $0.05     |
+| DEX swap fee            | 0.05% – 0.30%     |
+| Off-ramp withdrawal fee | ~£1 – £2          |
+| Compliance/KYC cost     | negligible per tx |
 
----
+### ⭐ Total Backend Cost: 0.1% – 0.3% 
+This is much lower than traditional payment rails.
 
 ## 💡 Smart Contract Overview
 
 **Contract Name:** `CrossBorderRemittance.sol`
 
 ### Functions
-| Function | Description |
-|-----------|-------------|
-| `sendRemittance(address recipient, uint amount)` | Transfers stablecoins to recipient |
-| `swapStablecoin(address tokenA, address tokenB, uint amount)` | Swaps between tokens using liquidity pool |
-| `getExchangeRate(address tokenA, address tokenB)` | Fetches simulated FX rate |
-| `addLiquidity(address token, uint amount)` | Adds tokens to the liquidity pool |
+| **Function**                                                        | **Description**                                                   |
+| ------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| `sendRemittance(address recipient, uint256 amount)`                 | Transfers USDT/USDC from CrossBorderX to backend/receiver wallet. |
+| `swapStablecoin(address tokenIn, address tokenOut, uint256 amount)` | Routes swap between stablecoins using DEX liquidity pool.         |
+| `getLiquidity(address token)`                                       | Returns current liquidity available for swaps.                    |
+| `addLiquidity(address token, uint256 amount)`                       | Adds tokens to internal liquidity pool.                           |
+| `withdrawLiquidity(address token, uint256 amount)`                  | Admin function to manage operational liquidity.                   |
+| `getExchangeRate(address tokenIn, address tokenOut)`                | Gets on-chain oracle FX rate (Chainlink).                         |
+| `estimateFees(uint256 amount)`                                      | Returns estimated gas + liquidity fees for the user.              |
+| `pause()`                                                           | Emergency pause for contract security.                            |
+| `unpause()`                                                         | Unpauses contract.                                                |
+| `setAdmin(address newAdmin)`                                        | Updates admin for contract operations.                            |
+
 
 ---
 
-## 🧠 Conceptual Flow
+## 🧠 This is a conceptual flow and will evolve significantly as the project progresses.
 
