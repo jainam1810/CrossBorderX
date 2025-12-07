@@ -28,29 +28,31 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 ## 🏗️ Architecture
 
 User (INR)
-     │
-     ▼
+   │
+   ▼
 Payment Gateway (Razorpay / PayU / Stripe)
-     │
-     ▼
+   │   (INR captured → backend balance updated)
+   ▼
 CrossBorderX Backend
- ├── FX Engine (INR → USDT)
- ├── Smart Contracts
- ├── Liquidity Pool Manager
- ├── Compliance Engine (KYC/AML)
- └── Swap Router (USDT → GBP)
-     │
-     ▼
+   ├── FX Engine (INR → USDT conversion)
+   ├── Smart Contracts (Swap, Transfer, Liquidity logic)
+   ├── Liquidity Pool Manager (USDT ↔ GBP pools)
+   ├── Compliance Engine (KYC / AML)
+   └── Swap Router (USDT → GBP conversion)
+   │
+   ▼
 Blockchain Network (Polygon / Solana)
-     │
-     ▼
-GBP Liquidity (DEX or CEX)
-     │
-     ▼
-UK Banking Partner (FPS)
-     │
-     ▼
-Receiver Bank Account (GBP)
+   │   (USDT transfer & swap execution)
+   ▼
+GBP Liquidity Partner
+   - DEX (Uniswap / Orca)
+   - CEX (Kraken / Coinbase / Binance UK)
+   │
+   ▼
+UK Banking Partner (FPS System Integration)
+   │   (GBP payout to recipient)
+   ▼
+Receiver's UK Bank Account (GBP)
 
 
 ---
