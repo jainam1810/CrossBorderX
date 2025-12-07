@@ -26,6 +26,7 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 ---
 
 ## 🏗️ Architecture
+
 User (INR)
      │
      ▼
