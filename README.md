@@ -29,10 +29,6 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 
 # CrossBorderX Architecture
 
-## System Overview
-
-CrossBorderX is a blockchain-based cross-border remittance platform enabling seamless INR to GBP transfers using cryptocurrency as a settlement layer.
-
 ---
 
 ## Architecture Diagram
