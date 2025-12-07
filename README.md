@@ -83,40 +83,6 @@ CrossBorderX is a blockchain-based cross-border remittance platform enabling sea
 
 ---
 
-## Transaction Flow
-
-### Step-by-Step Process
-
-1. **User Initiation (INR)**
-   - User enters amount and recipient details
-   - System displays FX rate and total cost breakdown
-   - User confirms transaction
-
-2. **Payment Collection (INR Pay-In)**
-   - Payment processed via Razorpay/PayU/Stripe
-   - Webhook confirmation received
-   - Transaction status updated
-
-3. **Backend Processing**
-   - **FX Engine**: Converts INR to USDT equivalent
-   - **Compliance Engine**: Runs KYC/AML checks
-   - **Smart Contracts**: Initiates blockchain transfer
-   - **Liquidity Manager**: Allocates USDT from reserves
-
-4. **Blockchain Settlement**
-   - USDT transferred on Polygon/Solana
-   - On-chain confirmation (~2-30 seconds)
-   - Transaction hash recorded
-
-5. **Liquidity Conversion (USDT → GBP)**
-   - **Swap Router**: Finds best rate across DEX/CEX
-   - USDT swapped for GBP stablecoin/fiat
-   - Execution on chosen exchange
-
-6. **Off-Ramp to UK Banking**
-   - GBP transferre
----
-
 ## ⚙️ Tech Stack
 
 | **Layer**                           | **Tools / Services**                                                                                     |
