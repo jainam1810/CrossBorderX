@@ -35,44 +35,51 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 
 ```
 ┌──────────────────────────────────────────┐
-│               User (INR)                 │
-└───────────────────┬──────────────────────┘
-                    ▼
+│                 User (India)             │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│        Payment Gateway (INR Pay-In)      │
-│     Razorpay • PayU • Stripe             │
-└───────────────────┬──────────────────────┘
-                    ▼
+│  India Pay-In (INR) - Razorpay / PayU    │
+│  (Collects INR under domestic license)   │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│            CrossBorderX Backend          │
-├──────────────────────────────────────────┤
-│ • FX Engine (INR → USDT)                 │
-│ • Smart Contracts (Swap, Transfer)       │
-│ • Liquidity Pool Manager (USDT ↔ GBP)    │
-│ • Compliance Engine (KYC / AML)          │
-│ • Swap Router (USDT → GBP)               │
-└───────────────────┬──────────────────────┘
-                    ▼
+│ CrossBorderX India (Domestic Entity)     │
+│ • User Balance                           │
+│ • KYC (Sumsub)                           │
+│ • INR → USD (Export Service Settlement)  │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│      Blockchain Network (Settlement)     │
-│        Polygon • Solana                  │
-│   (USDT Transfer & Swap Execution)       │
-└───────────────────┬──────────────────────┘
-                    ▼
+│ Offshore FX Entity (UAE/Singapore)       │
+│ • Receives USD via export settlement     │
+│ • Buys/Mints USDC/USDT via OTC desk      │
+│   (Cumberland / B2C2 / GSR / FalconX)    │
+│ • Manages Offshore Crypto Treasury       │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│           GBP Liquidity Partner          │
-├──────────────────────────────────────────┤
-│ • DEX: Uniswap • Orca                    │
-│ • CEX: Kraken • Coinbase • Binance UK    │
-└───────────────────┬──────────────────────┘
-                    ▼
+│ Blockchain Settlement Layer              │
+│ Polygon zkEVM / Solana / Base            │
+│ (Fast USDT transfer to UK partner node)  │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│      UK Banking Partner (FPS Off-Ramp)   │
-│      ClearBank • Modulr • Paynetics      │
-└───────────────────┬──────────────────────┘
-                    ▼
+│ FX Execution (UK/EU)                     │
+│ • USDT → GBP                             │
+│ • Liquidity Sources:                     │
+│     - Kraken / Coinbase / Binance UK     │
+│     - OTC (B2C2 / GSR / Cumberland)      │
+│     - DEX (Uniswap v3 GBP pairs)         │
+└───────────────┬──────────────────────────┘
+                ▼
 ┌──────────────────────────────────────────┐
-│       Receiver’s UK Bank Account (GBP)   │
+│ UK Banking Partner (FPS Off-Ramp)        │
+│ • ClearBank / Modulr / Paynetics         │
+└───────────────┬──────────────────────────┘
+                ▼
+┌──────────────────────────────────────────┐
+│ Receiver's UK Bank Account (GBP)         │
 └──────────────────────────────────────────┘
 
 ```
