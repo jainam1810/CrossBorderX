@@ -112,11 +112,17 @@ This project demonstrates how **crypto rails can replace outdated banking networ
 ## 🔄 How the Transfer Works (Walletless Flow)
 
 1️⃣ **User Initiates Transfer** - User enters INR → GBP and pays via UPI/Bank Transfer.
+
 2️⃣ **Backend Custody (No Wallet for User)** - Backend stores INR in a custodial balance under their verified profile.
+
 3️⃣ **Convert INR → USDT (Backend Only)** - Backend mints/purchases USDT via exchange or OTC partner.
+
 4️⃣ **Blockchain Settlement** - USDT sent instantly on a high-speed chain (Polygon/Base/Solana).
+
 5️⃣ **Liquidity Pool Swap** - USDT → GBP-stablecoin using low-slippage LP.
+
 6️⃣ **Off-Ramp to UK Bank** - GBP → UK bank via Faster Payments System (FPS). (USER CHOICE) - ⏱️ Usually minutes depending on bank.
+
 7️⃣ **Receiver gets GBP in Bank** - Receiver never interacts with crypto.
 
 ---
